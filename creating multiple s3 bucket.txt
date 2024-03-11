@@ -1,0 +1,75 @@
+provider "aws" {
+  region = "ap-south-1"  # Specify your desired AWS region
+}
+
+resource "aws_s3_bucket" "example1" {
+  bucket = "bucket-1234568-test"
+
+  tags = {
+    Name        = "My bucket 1"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example2" {
+  bucket = "bucket-123456888-test"
+
+  tags = {
+    Name        = "My bucket 2"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example3" {
+  bucket = "bucket-123456897-test"
+
+  tags = {
+    Name        = "My bucket 3"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example4" {
+  bucket = "bucket-123456897-test"
+
+  tags = {
+    Name        = "My bucket 4"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example5" {
+  bucket = "bucket-123456876-test"
+
+  tags = {
+    Name        = "My bucket 5"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example6" {
+  bucket = "bucket-1234568765-test"
+
+  tags = {
+    Name        = "My bucket 6"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example7" {
+  bucket = "bucket-1234568775-test"
+
+  tags = {
+    Name        = "My bucket 7"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example8" {
+  bucket = "bucket-1234568767-test"
+
+  tags = {
+    Name        = "My bucket 8"
+    Environment = "Dev"
+  }
+}

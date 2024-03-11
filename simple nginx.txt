@@ -1,0 +1,13 @@
+provider "aws" {
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "example10" {
+  ami           = "ami-03bb6d83c60fc5f7c"  # Ubuntu AMI ID for ap-south-1
+  instance_type = "t2.micro"
+  key_name      = "test"                   # Key pair name
+
+  tags = {
+    Name = "Nginx-Host-Instance"
+  }
+}

@@ -1,0 +1,55 @@
+provider "aws" {
+    region = "ap-southeast-1"
+}
+
+resource "aws_security_group" "sg" {
+    name = "my-sg"
+    description = "all httpd ports are allowed"
+
+    ingress {
+        from_port = 80
+        to_port = 80
+        protocol = "TCP"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "TCP"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    tags = {
+        Name = "my-security-group"
+    }
+  
+}
+
+resource "aws_instance" "my-instance" {
+  ami                    = "ami-0123c9b6bfb7eb962"
+  instance_type          = "t2.micro"
+  key_name               = "id_rsa"
+  tags = {
+    Name = "instance"
+  }
+  vpc_security_group_ids = ["aws_security_group.sg.id"]
+
+  user_data = <<-EOT
+                #!/bin/bash
+                apt update -y
+                apt install unzip -y
+                apt install nginx -y
+                systemctl start nginx.service
+                wget https://www.free-css.com/assets/files/free-css-templates/download/page296/oxer.zip
+                unzip oxer.zip
+                mv ./oxer-html/* /var/www/html/
+                systemctl restart nginx.service
+                systemctl enable nginx.service
+              EOT
+}

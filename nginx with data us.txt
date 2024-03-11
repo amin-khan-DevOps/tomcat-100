@@ -1,0 +1,24 @@
+provider "aws" {
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "example10" {
+  ami           = "ami-03bb6d83c60fc5f7c"  # Ubuntu AMI ID for ap-south-1
+  instance_type = "t2.micro"
+  key_name      = "test"                   # Key pair name
+
+   # Define user data to install Nginx and start the service
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo apt-get update
+              sudo apt-get install nginx -y
+              sudo systemctl start nginx
+              sudo systemctl enable nginx
+              sudo mkdir -p /var/www/html  # Ensure directory exists
+              sudo echo "Hello Amin" > /var/www/html/index.html
+              EOF
+
+  tags = {
+    Name = "Nginx-Host-Instance1"
+  }
+}
